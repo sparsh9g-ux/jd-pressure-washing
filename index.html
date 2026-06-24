@@ -120,11 +120,21 @@
             border-radius:16px; overflow:hidden;
             box-shadow:0 24px 80px rgba(0,0,0,0.5);
             position:relative; user-select:none;
+            height:500px;
         }
-        .slider-wrap img { display:block; width:100%; height:500px; object-fit:cover; }
-        .before-img { position:absolute; top:0; left:0; width:50%; height:100%; overflow:hidden; }
-        .before-img img { width:200%; max-width:none; height:100%; object-fit:cover; }
-        .after-img img { width:100%; height:500px; object-fit:cover; }
+        .slide-base {
+            position:absolute; top:0; left:0;
+            width:100%; height:100%; object-fit:cover; display:block;
+        }
+        .before-overlay {
+            position:absolute; top:0; left:0;
+            width:50%; height:100%; overflow:hidden;
+        }
+        .slide-dirty {
+            position:absolute; top:0; left:0;
+            height:100%; object-fit:cover; display:block;
+            filter:brightness(0.42) sepia(0.55) contrast(1.5) saturate(0.3);
+        }
 
         .slider-handle {
             position:absolute; top:0; left:50%; transform:translateX(-50%);
@@ -278,10 +288,8 @@
             .quote-form { padding:32px 24px; }
             footer { flex-direction:column; gap:16px; padding:32px 24px; text-align:center; }
             .section-header h2 { font-size:28px; }
-            .before-img img { width:200%; }
             .mobile-cta { display:block; }
-            .slider-wrap img, .after-img img { height:320px; }
-            .before-img img { height:320px; }
+            .slider-wrap { height:320px; }
         }
     </style>
 </head>
@@ -348,11 +356,9 @@
             <p>Drag the slider to see the transformation. This is what we do to every surface we touch.</p>
         </div>
         <div class="slider-wrap fade-in" id="slider">
-            <div class="after-img">
-                <img src="before-after.jpeg" alt="After pressure washing — clean brick">
-            </div>
-            <div class="before-img" id="beforeImg">
-                <img src="before-after.jpeg" alt="Before pressure washing — dirty brick">
+            <img class="slide-base" src="before-after.jpeg" alt="After pressure washing — clean brick">
+            <div class="before-overlay" id="beforeOverlay">
+                <img class="slide-dirty" id="slideDirty" src="before-after.jpeg" alt="Before pressure washing — dirty brick">
             </div>
             <div class="slider-label label-before">BEFORE</div>
             <div class="slider-handle" id="sliderHandle">
@@ -615,17 +621,24 @@
 
         // Before/After Slider
         const slider = document.getElementById('slider');
-        const beforeImg = document.getElementById('beforeImg');
+        const beforeOverlay = document.getElementById('beforeOverlay');
+        const slideDirty = document.getElementById('slideDirty');
         const handle = document.getElementById('sliderHandle');
         const labelAfter = document.getElementById('labelAfter');
         let dragging = false;
 
+        function syncDirtyWidth() {
+            slideDirty.style.width = slider.offsetWidth + 'px';
+        }
+        syncDirtyWidth();
+        window.addEventListener('resize', syncDirtyWidth);
+
         function setSlider(x) {
             const rect = slider.getBoundingClientRect();
             let pct = (x - rect.left) / rect.width;
-            pct = Math.min(Math.max(pct, 0.05), 0.95);
+            pct = Math.min(Math.max(pct, 0.02), 0.98);
             const pctPx = pct * 100;
-            beforeImg.style.width = pctPx + '%';
+            beforeOverlay.style.width = pctPx + '%';
             handle.style.left = pctPx + '%';
             labelAfter.style.right = (100 - pctPx + 2) + '%';
         }
