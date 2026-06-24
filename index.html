@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JD Pressure Washing | San Jose & South Bay</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --navy: #0A1628;
+            --navy-light: #0F1F3D;
+            --navy-mid: #152444;
+            --orange: #FF6B35;
+            --orange-light: #FF8C5A;
+            --white: #FFFFFF;
+            --gray-light: #F8F9FA;
+            --gray: #6C757D;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--navy);
+            overflow-x: hidden;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 22, 40, 0.96);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 107, 53, 0.2);
+        }
+
+        .nav-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 22px;
+            color: var(--white);
+        }
+
+        .nav-logo span { color: var(--orange); }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--orange); }
+
+        .nav-cta {
+            background: var(--orange) !important;
+            color: var(--white) !important;
+            padding: 10px 22px;
+            border-radius: 5px;
+            font-weight: 600 !important;
+        }
+
+        .nav-cta:hover { background: var(--orange-light) !important; }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0A1628 0%, #0F1F3D 55%, #152444 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-glow-1 {
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(255,107,53,0.12) 0%, transparent 65%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-glow-2 {
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,107,53,0.07) 0%, transparent 65%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-grid-bg {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,107,53,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,107,53,0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,107,53,0.12);
+            border: 1px solid rgba(255,107,53,0.3);
+            color: var(--orange);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+        }
+
+        .hero-badge-dot {
+            width: 7px;
+            height: 7px;
+            background: var(--orange);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.4); }
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 54px;
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span { color: var(--orange); }
+
+        .hero-sub {
+            font-size: 17px;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.75;
+            margin-bottom: 40px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--orange);
+            color: var(--white);
+            padding: 15px 32px;
+            border-radius: 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 24px rgba(255,107,53,0.4);
+        }
+
+        .btn-primary:hover {
+            background: var(--orange-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(255,107,53,0.5);
+        }
+
+        .btn-call {
+            color: rgba(255,255,255,0.85);
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s;
+        }
+
+        .btn-call:hover { color: var(--orange); }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.03);
+        }
+
+        .stat {
+            padding: 28px 20px;
+            text-align: center;
+            border-right: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .stat:last-child { border-right: none; }
+
+        .stat-number {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--orange);
+            line-height: 1;
+        }
+
+        .stat-label {
+            display: block;
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 6px;
+        }
+
+        /* SERVICES */
+        .services {
+            padding: 100px 60px;
+            background: var(--gray-light);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .section-tag {
+            display: inline-block;
+            color: var(--orange);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .section-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 38px;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 14px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-header p {
+            font-size: 16px;
+            color: var(--gray);
+            max-width: 480px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 36px 30px;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            border-color: var(--orange);
+            transform: translateY(-5px);
+            box-shadow: 0 16px 48px rgba(255,107,53,0.12);
+        }
+
+        .service-icon {
+            width: 54px;
+            height: 54px;
+            background: rgba(255,107,53,0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+
+        .service-card p {
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* WHY US */
+        .why-us {
+            padding: 100px 60px;
+            background: var(--navy);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .why-glow {
+            position: absolute;
+            top: -20%;
+            right: -5%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,107,53,0.08) 0%, transparent 65%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .why-us .section-header h2 { color: var(--white); }
+        .why-us .section-header p { color: rgba(255,255,255,0.55); }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .why-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 36px 30px;
+            transition: all 0.3s;
+        }
+
+        .why-card:hover {
+            background: rgba(255,107,53,0.08);
+            border-color: rgba(255,107,53,0.3);
+        }
+
+        .why-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 52px;
+            font-weight: 800;
+            color: rgba(255,107,53,0.25);
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        .why-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .why-card p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.55);
+            line-height: 1.75;
+        }
+
+        /* SERVICE AREA */
+        .service-area {
+            padding: 80px 60px;
+            background: var(--white);
+            text-align: center;
+        }
+
+        .area-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            max-width: 700px;
+            margin: 40px auto 0;
+        }
+
+        .area-tag {
+            background: var(--gray-light);
+            border: 2px solid rgba(255,107,53,0.15);
+            color: var(--navy);
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .area-tag:hover {
+            background: var(--orange);
+            color: var(--white);
+            border-color: var(--orange);
+        }
+
+        /* QUOTE FORM */
+        .quote {
+            padding: 100px 60px;
+            background: var(--navy-light);
+        }
+
+        .quote .section-header h2 { color: var(--white); }
+        .quote .section-header p { color: rgba(255,255,255,0.55); }
+
+        .quote-form {
+            max-width: 580px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 48px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-group { margin-bottom: 18px; }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 8px;
+            padding: 13px 16px;
+            color: var(--white);
+            font-size: 15px;
+            font-family: 'Open Sans', sans-serif;
+            transition: border-color 0.3s;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--orange);
+        }
+
+        .form-group select option { background: var(--navy); }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 110px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--orange);
+            color: var(--white);
+            border: none;
+            padding: 17px;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 6px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 20px rgba(255,107,53,0.4);
+        }
+
+        .btn-submit:hover {
+            background: var(--orange-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(255,107,53,0.5);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--navy);
+            border-top: 1px solid rgba(255,255,255,0.07);
+            padding: 36px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 20px;
+            color: var(--white);
+        }
+
+        .footer-logo span { color: var(--orange); }
+
+        .footer-center {
+            text-align: center;
+            font-size: 13px;
+            color: rgba(255,255,255,0.4);
+            line-height: 1.7;
+        }
+
+        .footer-phone {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--orange);
+            text-decoration: none;
+        }
+
+        /* ANIMATIONS */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            nav { padding: 16px 24px; }
+            .nav-links { display: none; }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                padding: 100px 24px 60px;
+                gap: 48px;
+            }
+
+            .hero h1 { font-size: 36px; }
+
+            .services, .why-us, .quote, .service-area { padding: 64px 24px; }
+
+            .services-grid, .why-grid { grid-template-columns: 1fr; }
+
+            .form-row { grid-template-columns: 1fr; }
+
+            .quote-form { padding: 32px 24px; }
+
+            footer {
+                flex-direction: column;
+                gap: 16px;
+                padding: 32px 24px;
+                text-align: center;
+            }
+
+            .section-header h2 { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-logo">JD <span>Pressure</span> Washing</div>
+        <ul class="nav-links">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#why-us">About</a></li>
+            <li><a href="#areas">Service Areas</a></li>
+            <li><a href="#quote" class="nav-cta">Get a Quote</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-glow-1"></div>
+        <div class="hero-glow-2"></div>
+        <div class="hero-grid-bg"></div>
+        <div class="hero-content">
+            <div class="fade-in">
+                <div class="hero-badge">
+                    <div class="hero-badge-dot"></div>
+                    Serving San Jose &amp; the South Bay
+                </div>
+                <h1>Pressure Washing That <span>Gets Results</span></h1>
+                <p class="hero-sub">From driveways to patios, house exteriors to tile — we restore your property to its best. Fast, reliable, and done right the first time.</p>
+                <div class="hero-buttons">
+                    <a href="#quote" class="btn-primary">Get a Free Quote</a>
+                    <a href="tel:4082306509" class="btn-call">📞 (408) 230-6509</a>
+                </div>
+            </div>
+            <div class="hero-stats fade-in">
+                <div class="stat">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Jobs Done</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">Years Exp.</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Satisfaction</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services" id="services">
+        <div class="section-header fade-in">
+            <span class="section-tag">What We Do</span>
+            <h2>Our Services</h2>
+            <p>Professional cleaning for every surface around your property.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card fade-in">
+                <div class="service-icon">🚗</div>
+                <h3>Driveway Cleaning</h3>
+                <p>Remove oil stains, dirt buildup, and grime from concrete and asphalt. Leave your driveway looking brand new.</p>
+            </div>
+            <div class="service-card fade-in">
+                <div class="service-icon">🏠</div>
+                <h3>House Exterior Washing</h3>
+                <p>Safe, thorough cleaning of siding, stucco, and painted surfaces. Boost your curb appeal instantly.</p>
+            </div>
+            <div class="service-card fade-in">
+                <div class="service-icon">🌿</div>
+                <h3>Patio &amp; Deck Cleaning</h3>
+                <p>Restore concrete, wood, and composite surfaces. Get your outdoor space ready for entertaining.</p>
+            </div>
+            <div class="service-card fade-in">
+                <div class="service-icon">🪨</div>
+                <h3>Tile &amp; Stone Cleaning</h3>
+                <p>Specialized cleaning for Catalan tile, pavers, and decorative stone. Detailed and done right.</p>
+            </div>
+            <div class="service-card fade-in">
+                <div class="service-icon">🔩</div>
+                <h3>Fence Washing</h3>
+                <p>Wood, vinyl, and metal fences restored. Remove mold, mildew, and years of discoloration.</p>
+            </div>
+            <div class="service-card fade-in">
+                <div class="service-icon">🏢</div>
+                <h3>Commercial Cleaning</h3>
+                <p>Storefronts, parking lots, and commercial properties kept clean and professional year-round.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY US -->
+    <section class="why-us" id="why-us">
+        <div class="why-glow"></div>
+        <div class="section-header fade-in">
+            <span class="section-tag">Why Choose Us</span>
+            <h2>The JD Difference</h2>
+            <p>We show up, we do the work, and we do it right.</p>
+        </div>
+        <div class="why-grid">
+            <div class="why-card fade-in">
+                <div class="why-number">01</div>
+                <h3>Reliable &amp; On Time</h3>
+                <p>We show up when we say we will. No runaround, no excuses — just professional service you can count on every time.</p>
+            </div>
+            <div class="why-card fade-in">
+                <div class="why-number">02</div>
+                <h3>Locally Owned &amp; Operated</h3>
+                <p>We live and work in the South Bay. Your neighbors are our customers — and we take that seriously.</p>
+            </div>
+            <div class="why-card fade-in">
+                <div class="why-number">03</div>
+                <h3>We Handle Everything</h3>
+                <p>From first call to final rinse, we take care of it all. You just show us what needs cleaning — we do the rest.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICE AREA -->
+    <section class="service-area" id="areas">
+        <div class="section-header fade-in">
+            <span class="section-tag">Where We Work</span>
+            <h2>Serving the South Bay</h2>
+            <p>Based in San Jose — covering the entire South Bay area.</p>
+        </div>
+        <div class="area-tags fade-in">
+            <span class="area-tag">San Jose</span>
+            <span class="area-tag">Campbell</span>
+            <span class="area-tag">Santa Clara</span>
+            <span class="area-tag">Sunnyvale</span>
+            <span class="area-tag">Milpitas</span>
+            <span class="area-tag">Morgan Hill</span>
+            <span class="area-tag">Los Gatos</span>
+            <span class="area-tag">Cupertino</span>
+            <span class="area-tag">Saratoga</span>
+        </div>
+    </section>
+
+    <!-- QUOTE FORM -->
+    <section class="quote" id="quote">
+        <div class="section-header fade-in">
+            <span class="section-tag">Get Started</span>
+            <h2>Get Your Free Quote</h2>
+            <p>Fill out the form and we'll get back to you fast.</p>
+        </div>
+        <div class="quote-form fade-in">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input type="text" placeholder="John Smith">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" placeholder="(408) 000-0000">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Service Needed</label>
+                <select>
+                    <option value="">Select a service...</option>
+                    <option>Driveway Cleaning</option>
+                    <option>House Exterior Washing</option>
+                    <option>Patio &amp; Deck Cleaning</option>
+                    <option>Tile &amp; Stone Cleaning</option>
+                    <option>Fence Washing</option>
+                    <option>Commercial Cleaning</option>
+                    <option>Other / Not Sure</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Tell Us More</label>
+                <textarea placeholder="Describe what needs cleaning, your address, and any details..."></textarea>
+            </div>
+            <button class="btn-submit">Get My Free Quote →</button>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">JD <span>Pressure</span> Washing</div>
+        <div class="footer-center">
+            Serving San Jose &amp; the South Bay<br>
+            © 2026 JD Pressure Washing. All rights reserved.
+        </div>
+        <a href="tel:4082306509" class="footer-phone">(408) 230-6509</a>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
