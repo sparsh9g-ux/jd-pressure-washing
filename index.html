@@ -502,16 +502,16 @@
             <div class="form-row">
                 <div class="form-group">
                     <label>Your Name</label>
-                    <input type="text" placeholder="John Smith">
+                    <input type="text" id="quoteName" placeholder="John Smith">
                 </div>
                 <div class="form-group">
                     <label>Phone Number</label>
-                    <input type="tel" placeholder="(408) 000-0000">
+                    <input type="tel" id="quotePhone" placeholder="(408) 000-0000">
                 </div>
             </div>
             <div class="form-group">
                 <label>Service Needed</label>
-                <select>
+                <select id="quoteService">
                     <option value="">Select a service...</option>
                     <option>Driveway Cleaning</option>
                     <option>House Exterior Washing</option>
@@ -524,9 +524,10 @@
             </div>
             <div class="form-group">
                 <label>Tell Us More</label>
-                <textarea placeholder="Describe what needs cleaning, your address, and any details..."></textarea>
+                <textarea id="quoteMessage" placeholder="Describe what needs cleaning, your address, and any details..."></textarea>
             </div>
-            <button class="btn-submit">Get My Free Quote →</button>
+            <button class="btn-submit" id="quoteSubmitBtn">Get My Free Quote →</button>
+            <p id="quoteStatus" style="margin-top:12px;font-size:14px;"></p>
         </div>
     </section>
 
@@ -552,6 +553,43 @@
         }, { threshold: 0.1 });
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
+        // Quote form -> instant lead response webhook
+        const QUOTE_WEBHOOK_URL = 'https://less-ids-cpu-interracial.trycloudflare.com/webhook/instant-lead-pressure-washing';
+        const quoteSubmitBtn = document.getElementById('quoteSubmitBtn');
+        const quoteStatus = document.getElementById('quoteStatus');
+
+        quoteSubmitBtn.addEventListener('click', async () => {
+            const name = document.getElementById('quoteName').value.trim();
+            const phone = document.getElementById('quotePhone').value.trim();
+            const service = document.getElementById('quoteService').value;
+            const message = document.getElementById('quoteMessage').value.trim();
+
+            if (!name || !phone) {
+                quoteStatus.textContent = 'Please enter your name and phone number.';
+                quoteStatus.style.color = '#ff6b35';
+                return;
+            }
+
+            quoteSubmitBtn.disabled = true;
+            quoteSubmitBtn.textContent = 'Sending...';
+            quoteStatus.textContent = '';
+
+            try {
+                await fetch(QUOTE_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, phone, service, message })
+                });
+                quoteSubmitBtn.textContent = 'Request Sent ✓';
+                quoteStatus.textContent = "Thanks! We'll text you shortly with a quote.";
+                quoteStatus.style.color = '#1a3a5c';
+            } catch (err) {
+                quoteSubmitBtn.disabled = false;
+                quoteSubmitBtn.textContent = 'Get My Free Quote →';
+                quoteStatus.textContent = 'Something went wrong — please call us directly.';
+                quoteStatus.style.color = '#ff6b35';
+            }
+        });
     </script>
 
 </body>
