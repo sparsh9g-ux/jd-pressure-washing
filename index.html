@@ -554,7 +554,7 @@
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
         // Quote form -> instant lead response webhook
-        const QUOTE_WEBHOOK_URL = 'https://less-ids-cpu-interracial.trycloudflare.com/webhook/instant-lead-pressure-washing';
+        const QUOTE_WEBHOOK_URL = 'https://plans-jacksonville-minerals-gifts.trycloudflare.com/webhook/instant-lead-pressure-washing';
         const quoteSubmitBtn = document.getElementById('quoteSubmitBtn');
         const quoteStatus = document.getElementById('quoteStatus');
 
@@ -575,11 +575,14 @@
             quoteStatus.textContent = '';
 
             try {
-                await fetch(QUOTE_WEBHOOK_URL, {
+                const response = await fetch(QUOTE_WEBHOOK_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name, phone, service, message })
                 });
+                if (!response.ok) {
+                    throw new Error(`Webhook returned ${response.status}`);
+                }
                 quoteSubmitBtn.textContent = 'Request Sent ✓';
                 quoteStatus.textContent = "Thanks! We'll text you shortly with a quote.";
                 quoteStatus.style.color = '#1a3a5c';
