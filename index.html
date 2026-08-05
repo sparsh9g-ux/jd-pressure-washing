@@ -577,7 +577,10 @@
             try {
                 const response = await fetch(QUOTE_WEBHOOK_URL, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Webhook-Secret': 'zJqL4Uk1HBnDcdfavcEb9pqvbVMmpWMznjOaa8gijkA'
+                    },
                     body: JSON.stringify({ name, phone, service, message })
                 });
                 if (!response.ok) {
